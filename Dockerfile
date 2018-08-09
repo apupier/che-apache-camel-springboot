@@ -9,7 +9,7 @@
 #   Red Hat, Inc. - initial API and implementation
 FROM registry.centos.org/che-stacks/centos-jdk8
 
-MAINTAINER AurÃƒÆ’Ã‚Â©lien Pupier
+MAINTAINER Aurélien Pupier
 
 EXPOSE 8080
 LABEL che:server:8080:ref=springboot che:server:8080:protocol=http
