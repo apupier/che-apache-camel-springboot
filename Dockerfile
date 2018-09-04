@@ -49,5 +49,5 @@ ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LI
 
 #provide Hawt.io, a runtime management console
 RUN mkdir /home/user/hawtio && \ 
-    sudo wget -P /home/user/hawtio "https://oss.sonatype.org/content/repositories/public/io/hawt/hawtio-app/2.0.2/hawtio-app-2.0.2.jar"
-CMD ["java","-jar","/home/user/hawtio/hawtio-app-2.0.2.jar","--port","8090"]
+    sudo wget -P /home/user/hawtio "https://oss.sonatype.org/content/repositories/public/io/hawt/hawtio-app/2.0.3/hawtio-app-2.0.3.jar"
+CMD ["java","-jar","/home/user/hawtio/hawtio-app-2.0.3.jar","--port","8090"]
