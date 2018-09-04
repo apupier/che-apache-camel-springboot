@@ -9,7 +9,7 @@
 #   Red Hat, Inc. - initial API and implementation
 FROM registry.centos.org/che-stacks/centos-jdk8
 
-MAINTAINER Aurélien Pupier
+MAINTAINER AurÃ©lien Pupier
 
 EXPOSE 8080
 LABEL che:server:8080:ref=springboot che:server:8080:protocol=http
@@ -37,13 +37,12 @@ RUN sudo chown user:user /tmp/install_camel_dependencies.sh && \
     sudo chgrp -R 0 /home/user && \
     sudo chmod -R g+rwX /home/user
 
-#Provide yeoman, available in Che terminal with 'yo' command
-#TODO: provide specific generator for Camel
+#Provide yeoman with Camel project generator, available in Che terminal with 'yo' command
 RUN sudo yum update -y && \
     sudo yum -y install rh-nodejs6 && \
     sudo yum -y clean all  && \
     sudo ln -s /opt/rh/rh-nodejs6/root/usr/bin/node /usr/local/bin/nodejs && \
-    sudo scl enable rh-nodejs6 'npm install --unsafe-perm -g yo' && \
+    sudo scl enable rh-nodejs6 'npm install --unsafe-perm -g yo generator-camel-project' && \
     cat /opt/rh/rh-nodejs6/enable >> /home/user/.bashrc
 ENV PATH=/opt/rh/rh-nodejs6/root/usr/bin${PATH:+:${PATH}}
 ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
