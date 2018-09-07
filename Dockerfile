@@ -9,7 +9,7 @@
 #   Red Hat, Inc. - initial API and implementation
 FROM registry.centos.org/che-stacks/centos-jdk8
 
-MAINTAINER AurÃ©lien Pupier
+MAINTAINER Aurelien Pupier
 
 EXPOSE 8080
 LABEL che:server:8080:ref=springboot che:server:8080:protocol=http
@@ -51,3 +51,13 @@ ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LI
 RUN mkdir /home/user/hawtio && \ 
     sudo wget -P /home/user/hawtio "https://oss.sonatype.org/content/repositories/public/io/hawt/hawtio-app/2.0.3/hawtio-app-2.0.3.jar"
 CMD ["java","-jar","/home/user/hawtio/hawtio-app-2.0.3.jar","--port","8090"]
+
+#provide AtlasMap, a Data mapper
+RUN mkdir /home/user/atlasmap && \ 
+    sudo wget -P /home/user/atlasmap "https://maven.repository.redhat.com/ga/io/atlasmap/runtime/1.34.5.fuse-000001-redhat-3/runtime-1.34.5.fuse-000001-redhat-3.jar"
+CMD ["java","-jar","/home/user/hawtio/runtime-1.34.5.fuse-000001-redhat-3.jar"]
+RUN	sudo scl enable rh-nodejs6 'npm install --unsafe-perm -g yarn' && \
+	cat /opt/rh/rh-nodejs6/enable >> /home/user/.bashrc
+ENV PATH=/opt/rh/rh-nodejs6/root/usr/bin${PATH:+:${PATH}}
+RUN yarn add @atlasmap/atlasmap.data.mapper && \
+    yarn start @atlasmap/atlasmap.data.mapper
